@@ -1,22 +1,22 @@
 class Ninja {
     constructor(nombre) {
         this.nombre = nombre;
-        this.salud = 100;  // Valor inicial de salud
-        this.velocidad = 3;  // Valor predeterminado de velocidad
-        this.fuerza = 3;  // Valor predeterminado de fuerza
+        this.salud = 100;
+        this.velocidad = 3;
+        this.fuerza = 3;
     }
 
     sayName() {
-        console.log(`Nombre del Ninja: ${this.nombre}`);
+        return `Ninja's name: ${this.nombre}`;
     }
 
     showStats() {
-        console.log(`Nombre: ${this.nombre}, Fuerza: ${this.fuerza}, Velocidad: ${this.velocidad}, Salud: ${this.salud}`);
+        return `Name: ${this.nombre}, Strength: ${this.fuerza}, Speed: ${this.velocidad}, Health: ${this.salud}`;
     }
 
     drinkSake() {
         this.salud += 10;
-        console.log(`${this.nombre} ha bebido sake y ha aumentado su salud a ${this.salud}`);
+        return `${this.nombre} drank sake and gained health. Current health: ${this.salud}`;
     }
 }
 
@@ -31,13 +31,19 @@ class Sensei extends Ninja {
 
     speakWisdom() {
         this.drinkSake();
-        console.log("Lo que un programador puede hacer en un mes, dos programadores pueden hacerlo en dos meses.");
+        return "Lo que un programador puede hacer en un mes, dos programadores pueden hacerlo en dos meses.";
     }
 }
 
+document.getElementById('createNinja').addEventListener('click', () => {
+    const ninja = new Ninja("Hyabusa");
+    const output = document.getElementById('output');
+    output.innerHTML = `<p>${ninja.sayName()}</p><p>${ninja.showStats()}</p>`;
+});
 
-const superSensei = new Sensei("Master Splinter");
-superSensei.speakWisdom();  
-// -> "Lo que un programador puede hacer en un mes, dos programadores pueden hacerlo en dos meses."
-superSensei.showStats();  
-// -> "Nombre: Master Splinter, Salud: 210, Velocidad: 10, Fuerza: 10"
+document.getElementById('createSensei').addEventListener('click', () => {
+    const sensei = new Sensei("Master Splinter");
+    const output = document.getElementById('output');
+    const wisdom = sensei.speakWisdom();
+    output.innerHTML = `<p>${wisdom}</p><p>${sensei.showStats()}</p>`;
+});
